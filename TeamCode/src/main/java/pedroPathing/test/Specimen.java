@@ -1,6 +1,7 @@
 package pedroPathing.test;
 
 import com.pedropathing.follower.Follower;
+import com.pedropathing.localization.Pose;
 import com.pedropathing.pathgen.BezierCurve;
 import com.pedropathing.pathgen.BezierLine;
 import com.pedropathing.pathgen.Path;
@@ -9,7 +10,7 @@ import com.pedropathing.pathgen.Point;
 import com.pedropathing.util.Constants;
 import com.pedropathing.util.Timer;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import  com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import pedroPathing.constants.FConstants;
 import pedroPathing.constants.LConstants;
@@ -18,7 +19,7 @@ import pedroPathing.constants.LConstants;
 public class Specimen extends OpMode {
 
     private Follower follower;
-    private Timer pathTimer;
+    private Timer pathTimer, opmodeTimer;
     private int pathState;
 
     private Path scoreSpecimen, line8, line9, line10, line11, line12, line13, line14, park;
@@ -235,24 +236,36 @@ public class Specimen extends OpMode {
         }
     }
 
-    public void setPathState(int pState) {
-        pathState = pState;
+    public void setPathState(int newState) {
+        pathState = newState;
         pathTimer.resetTimer();
     }
 
-    @Override
     public void init() {
         pathTimer = new Timer();
+        opmodeTimer = new Timer();
+        opmodeTimer.resetTimer();
+
         Constants.setConstants(FConstants.class, LConstants.class);
         follower = new Follower(hardwareMap);
+        follower.setStartingPose(new Pose(6.661, 66.220, Math.toRadians(0)));
         buildPaths();
     }
 
     @Override
+    public void start() {
+        opmodeTimer.resetTimer();
+        setPathState(0);
+    }
+
     public void loop() {
         follower.update();
         autonomousPathUpdate();
-        telemetry.addData("Path State", pathState);
+
+        telemetry.addData("path state", pathState);
+        telemetry.addData("x", follower.getPose().getX());
+        telemetry.addData("y", follower.getPose().getY());
+        telemetry.addData("heading", follower.getPose().getHeading());
         telemetry.update();
     }
 }
