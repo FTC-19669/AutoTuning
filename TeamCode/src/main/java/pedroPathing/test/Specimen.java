@@ -22,19 +22,22 @@ public class Specimen extends OpMode {
     private Timer pathTimer, opmodeTimer;
     private int pathState;
 
-    private Path scoreSpecimen, line8, line9, line10, line11, line12, line13, line14, park;
+    private final Pose startingPose = new Pose(6.661, 66.220, Math.toRadians(0));
+    private final Pose scorePose = new Pose(42.300, 66.220, Math.toRadians(0));
+
+    private Path scorePreload, scoreSampleOne, line9, line10, line11, line12, line13, line14, park;
     private PathChain pushSamples;
 
     public void buildPaths() {
         // Line 1
-        scoreSpecimen = new Path(
+        scorePreload = new Path(
                 new BezierLine(
-                        new Point(6.661, 66.220, Point.CARTESIAN),
-                        new Point(42.300, 66.220, Point.CARTESIAN)
+                        new Point(startingPose.getX(), startingPose.getY(), Point.CARTESIAN),
+                        new Point(scorePose.getX(), scorePose.getY(), Point.CARTESIAN)
                 )
         );
-        scoreSpecimen.setConstantHeadingInterpolation(Math.toRadians(0));
-        scoreSpecimen.setPathEndVelocityConstraint(0.5);
+        scorePreload.setConstantHeadingInterpolation(startingPose.getHeading());
+        scorePreload.setPathEndVelocityConstraint(0.5);
 
         // PathChain for Lines 2–7
         pushSamples = follower.pathBuilder()
@@ -86,15 +89,15 @@ public class Specimen extends OpMode {
                 .build();
 
         // Remaining Lines (8–15)
-        line8 = new Path(
+        scoreSampleOne = new Path(
                 new BezierCurve(
                         new Point(6.269, 6.269, Point.CARTESIAN),
                         new Point(19.984, 72.686, Point.CARTESIAN),
                         new Point(42.300, 69.159, Point.CARTESIAN)
                 )
         );
-        line8.setConstantHeadingInterpolation(Math.toRadians(0));
-        line8.setPathEndVelocityConstraint(0.5);
+        scoreSampleOne.setConstantHeadingInterpolation(Math.toRadians(0));
+        scoreSampleOne.setPathEndVelocityConstraint(0.5);
 
         line9 = new Path(
                 new BezierCurve(
@@ -171,7 +174,7 @@ public class Specimen extends OpMode {
     public void autonomousPathUpdate() {
         switch (pathState) {
             case 0:
-                follower.followPath(scoreSpecimen, true);
+                follower.followPath(scorePreload, true);
                 follower.setMaxPower(1); // Set max power
                 setPathState(1);
                 break;
@@ -184,7 +187,7 @@ public class Specimen extends OpMode {
                 break;
             case 2:
                 if (!follower.isBusy()) {
-                    follower.followPath(line8, true);
+                    follower.followPath(scoreSampleOne, true);
                     follower.setMaxPower(1);
                     setPathState(3);
                 }
@@ -253,7 +256,7 @@ public class Specimen extends OpMode {
 
         Constants.setConstants(FConstants.class, LConstants.class);
         follower = new Follower(hardwareMap);
-        follower.setStartingPose(new Pose(6.661, 66.220, Math.toRadians(0)));
+        follower.setStartingPose(startingPose);
         buildPaths();
     }
 
