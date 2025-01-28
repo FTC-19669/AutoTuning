@@ -33,6 +33,7 @@ public class Specimen extends OpMode {
                 )
         );
         scoreSpecimen.setConstantHeadingInterpolation(Math.toRadians(0));
+        scoreSpecimen.setPathEndVelocityConstraint(0.5);
 
         // PathChain for Lines 2–7
         pushSamples = follower.pathBuilder()
@@ -92,6 +93,7 @@ public class Specimen extends OpMode {
                 )
         );
         line8.setConstantHeadingInterpolation(Math.toRadians(0));
+        line8.setPathEndVelocityConstraint(0.5);
 
         line9 = new Path(
                 new BezierCurve(
@@ -112,6 +114,7 @@ public class Specimen extends OpMode {
                 )
         );
         line10.setConstantHeadingInterpolation(Math.toRadians(0));
+        line10.setPathEndVelocityConstraint(0.5);
 
         line11 = new Path(
                 new BezierCurve(
@@ -132,6 +135,7 @@ public class Specimen extends OpMode {
                 )
         );
         line12.setConstantHeadingInterpolation(Math.toRadians(0));
+        line12.setPathEndVelocityConstraint(0.5);
 
         line13 = new Path(
                 new BezierCurve(
@@ -152,6 +156,7 @@ public class Specimen extends OpMode {
                 )
         );
         line14.setConstantHeadingInterpolation(Math.toRadians(0));
+        line14.setPathEndVelocityConstraint(0.5);
 
         park = new Path(
                 new BezierLine(
