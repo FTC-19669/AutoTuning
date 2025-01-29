@@ -28,6 +28,7 @@ public class FConstants {
         FollowerConstants.forwardZeroPowerAcceleration = -25.418726731642277;
         FollowerConstants.lateralZeroPowerAcceleration = -65.19877594716175;
 
+        /*
         FollowerConstants.translationalPIDFCoefficients.setCoefficients(0.05,0,0.0001,0);
         FollowerConstants.useSecondaryTranslationalPID = true;
         FollowerConstants.secondaryTranslationalPIDFCoefficients.setCoefficients(0.075,0,0.01,0);
@@ -40,11 +41,25 @@ public class FConstants {
         FollowerConstants.useSecondaryDrivePID = true;
         FollowerConstants.secondaryDrivePIDFCoefficients.setCoefficients(0.02,0,0.0001,0.6,0);
 
-        FollowerConstants.zeroPowerAccelerationMultiplier = 3;
+         */
+
+        FollowerConstants.translationalPIDFCoefficients.setCoefficients(0.16,0,0.01,0);
+        FollowerConstants.useSecondaryTranslationalPID = true;
+        FollowerConstants.secondaryTranslationalPIDFCoefficients.setCoefficients(0.13,0,0.015,0); // @see useSecondaryTranslationalPID
+
+        FollowerConstants.headingPIDFCoefficients.setCoefficients(1.5,0,0.1,0);
+        FollowerConstants.useSecondaryHeadingPID = true;
+        FollowerConstants.secondaryHeadingPIDFCoefficients.setCoefficients(0.9,0,0.08,0); // @see useSecondaryHeadingPID
+
+        FollowerConstants.drivePIDFCoefficients.setCoefficients(0.018,0,0.0000012,0.6,0);
+        FollowerConstants.useSecondaryDrivePID = true;
+        FollowerConstants.secondaryDrivePIDFCoefficients.setCoefficients(0.01,0,0.000001,0.6,0); // @see useSecondaryDrivePID
+
+        FollowerConstants.zeroPowerAccelerationMultiplier = 4;
         FollowerConstants.centripetalScaling = 0.00015;
 
         FollowerConstants.pathEndTimeoutConstraint = 100;
-        FollowerConstants.pathEndTValueConstraint = 0.95;
+        FollowerConstants.pathEndTValueConstraint = 0.98;
         FollowerConstants.pathEndVelocityConstraint = 0.1;
         FollowerConstants.pathEndTranslationalConstraint = 0.1;
         FollowerConstants.pathEndHeadingConstraint = 0.006;
