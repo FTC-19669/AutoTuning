@@ -50,7 +50,7 @@ public class LocalizationTest extends OpMode {
     private DcMotorEx rightFront;
     private DcMotorEx rightRear;
     private List<DcMotorEx> motors;
-    public double startingPoseX = 6.661;
+    public double startingPoseX = 6.6;
     public double startingPoseY = 66.220;
     public double startingPoseHeading = 0;
 
