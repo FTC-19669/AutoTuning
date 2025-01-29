@@ -54,6 +54,7 @@ public class FConstants {
         FollowerConstants.drivePIDFCoefficients.setCoefficients(0.018,0,0.0000012,0.6,0);
         FollowerConstants.useSecondaryDrivePID = true;
         FollowerConstants.secondaryDrivePIDFCoefficients.setCoefficients(0.01,0,0.000001,0.6,0); // @see useSecondaryDrivePID
+        FollowerConstants.drivePIDFFeedForward = 0.06;
 
         FollowerConstants.zeroPowerAccelerationMultiplier = 4;
         FollowerConstants.centripetalScaling = 0.00015;
