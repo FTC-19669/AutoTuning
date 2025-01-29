@@ -22,8 +22,9 @@ public class Specimen extends OpMode {
     private Timer pathTimer, opmodeTimer;
     private int pathState;
 
+    private double scoreX = 50;
     private final Pose startingPose = new Pose(6.661, 66.220, Math.toRadians(0));
-    private final Pose scorePose = new Pose(42.300, 66.220, Math.toRadians(0));
+    private final Pose scorePose = new Pose(scoreX, 68.220, Math.toRadians(0));
 
     private Path scorePreload, scoreSampleOne, line9, line10, line11, line12, line13, line14, park;
     private PathChain pushSamples;
@@ -37,13 +38,12 @@ public class Specimen extends OpMode {
                 )
         );
         scorePreload.setConstantHeadingInterpolation(startingPose.getHeading());
-        scorePreload.setPathEndVelocityConstraint(0.5);
 
         // PathChain for Lines 2–7
         pushSamples = follower.pathBuilder()
                 .addPath(
                         new BezierCurve(
-                                new Point(42.300, 66.220, Point.CARTESIAN),
+                                new Point(scoreX, 66.220, Point.CARTESIAN),
                                 new Point(19.788, 20.767, Point.CARTESIAN),
                                 new Point(62.302, 43.102, Point.CARTESIAN),
                                 new Point(60.931, 22.531, Point.CARTESIAN)
@@ -93,7 +93,7 @@ public class Specimen extends OpMode {
                 new BezierCurve(
                         new Point(6.269, 6.269, Point.CARTESIAN),
                         new Point(19.984, 72.686, Point.CARTESIAN),
-                        new Point(42.300, 69.159, Point.CARTESIAN)
+                        new Point(scoreX, 69.159, Point.CARTESIAN)
                 )
         );
         scoreSampleOne.setConstantHeadingInterpolation(Math.toRadians(0));
@@ -101,7 +101,7 @@ public class Specimen extends OpMode {
 
         line9 = new Path(
                 new BezierCurve(
-                        new Point(42.300, 69.159, Point.CARTESIAN),
+                        new Point(scoreX, 69.159, Point.CARTESIAN),
                         new Point(21.355, 72.098, Point.CARTESIAN),
                         new Point(29.976, 38.008, Point.CARTESIAN),
                         new Point(6.857, 33.502, Point.CARTESIAN)
@@ -114,15 +114,14 @@ public class Specimen extends OpMode {
                         new Point(6.857, 33.502, Point.CARTESIAN),
                         new Point(29.976, 38.008, Point.CARTESIAN),
                         new Point(21.355, 72.098, Point.CARTESIAN),
-                        new Point(42.300, 71.159, Point.CARTESIAN)
+                        new Point(scoreX, 71.159, Point.CARTESIAN)
                 )
         );
         line10.setConstantHeadingInterpolation(Math.toRadians(0));
-        line10.setPathEndVelocityConstraint(0.5);
 
         line11 = new Path(
                 new BezierCurve(
-                        new Point(42.300, 71.159, Point.CARTESIAN),
+                        new Point(scoreX, 71.159, Point.CARTESIAN),
                         new Point(21.355, 72.098, Point.CARTESIAN),
                         new Point(29.976, 38.008, Point.CARTESIAN),
                         new Point(6.857, 33.502, Point.CARTESIAN)
@@ -135,15 +134,14 @@ public class Specimen extends OpMode {
                         new Point(6.857, 33.502, Point.CARTESIAN),
                         new Point(29.976, 38.008, Point.CARTESIAN),
                         new Point(21.355, 72.098, Point.CARTESIAN),
-                        new Point(42.300, 73.159, Point.CARTESIAN)
+                        new Point(scoreX, 73.159, Point.CARTESIAN)
                 )
         );
         line12.setConstantHeadingInterpolation(Math.toRadians(0));
-        line12.setPathEndVelocityConstraint(0.5);
 
         line13 = new Path(
                 new BezierCurve(
-                        new Point(42.300, 73.159, Point.CARTESIAN),
+                        new Point(scoreX, 73.159, Point.CARTESIAN),
                         new Point(21.355, 72.098, Point.CARTESIAN),
                         new Point(29.976, 38.008, Point.CARTESIAN),
                         new Point(6.857, 33.502, Point.CARTESIAN)
@@ -156,15 +154,14 @@ public class Specimen extends OpMode {
                         new Point(6.857, 33.502, Point.CARTESIAN),
                         new Point(29.192, 36.637, Point.CARTESIAN),
                         new Point(21.355, 72.098, Point.CARTESIAN),
-                        new Point(42.300, 75.159, Point.CARTESIAN)
+                        new Point(scoreX, 75.159, Point.CARTESIAN)
                 )
         );
         line14.setConstantHeadingInterpolation(Math.toRadians(0));
-        line14.setPathEndVelocityConstraint(0.5);
 
         park = new Path(
                 new BezierLine(
-                        new Point(42.300, 75.159, Point.CARTESIAN),
+                        new Point(scoreX, 75.159, Point.CARTESIAN),
                         new Point(6.857, 37.420, Point.CARTESIAN)
                 )
         );
@@ -174,8 +171,8 @@ public class Specimen extends OpMode {
     public void autonomousPathUpdate() {
         switch (pathState) {
             case 0:
+                follower.setMaxPower(1);
                 follower.followPath(scorePreload, true);
-                follower.setMaxPower(1); // Set max power
                 setPathState(1);
                 break;
             case 1:
@@ -264,6 +261,7 @@ public class Specimen extends OpMode {
     public void start() {
         opmodeTimer.resetTimer();
         setPathState(0);
+        follower.setMaxPower(1);
     }
 
     public void loop() {
