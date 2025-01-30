@@ -21,15 +21,15 @@ public class Specimen extends OpMode {
     private Timer pathTimer, opmodeTimer;
     private int pathState;
 
-    private Pose startingPose = new Pose(6.661, 66.220, Math.toRadians(0));
-    private Pose scorePose = new Pose(43.67, 72.49, Math.toRadians(0));
-    private Pose pushSampleOnePose = new Pose(55, 28.95, Math.toRadians(0));
-    private Pose pushSampleOneEndPose = new Pose(19.83, 28.95, Math.toRadians(0));
-    private Pose pushSampleTwoPose = new Pose(55, 19.81, Math.toRadians(0));
-    private Pose pushSampleTwoEndPose = new Pose(18.56, 19.81, Math.toRadians(0));
-    private Pose pushSampleThreePose = new Pose(55, 16, Math.toRadians(0));
-    private Pose pushSampleThreeEndPose = new Pose(10.74, 16, Math.toRadians(0));
-    private Pose pickupSpecimens = new Pose(6.49, 41.79, Math.toRadians(0));
+    private final Pose startingPose = new Pose(6.661, 66.220, Math.toRadians(0));
+    private final Pose scorePose = new Pose(43.67, 72.49, Math.toRadians(0));
+    private final Pose pushSampleOnePose = new Pose(55, 28.95, Math.toRadians(0));
+    private final Pose pushSampleOneEndPose = new Pose(19.83, 28.95, Math.toRadians(0));
+    private final Pose pushSampleTwoPose = new Pose(55, 19.81, Math.toRadians(0));
+    private final Pose pushSampleTwoEndPose = new Pose(18.56, 19.81, Math.toRadians(0));
+    private final Pose pushSampleThreePose = new Pose(55, 16, Math.toRadians(0));
+    private final Pose pushSampleThreeEndPose = new Pose(10.74, 16, Math.toRadians(0));
+    private final Pose pickupSpecimens = new Pose(6.49, 41.79, Math.toRadians(0));
     private final Pose parkPose = new Pose(6.49, 41.79, Math.toRadians(0));
 
     private PathChain scorePreload, pushSamples, line8, line9, line10, line11, line12, line13, line14, park;
