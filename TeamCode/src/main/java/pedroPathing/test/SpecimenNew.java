@@ -33,7 +33,8 @@ public class SpecimenNew extends OpMode {
     private Pose pickupSpecimens = new Pose(6.49, 41.79, Math.toRadians(0));
     private final Pose parkPose = new Pose(6.49, 41.79, Math.toRadians(0));
 
-    private PathChain scorePreload, pushSamples, line8, line9, line10, line11, line12, line13, line14, park;
+    private PathChain scorePreload, line2, line3, line4, line5, line6, line7,
+            line8, line9, line10, line11, line12, line13, line14, park;
 
     public void buildPaths() {
         scorePreload = follower.pathBuilder()
@@ -44,56 +45,61 @@ public class SpecimenNew extends OpMode {
                                 new Point(scorePose.getX(), scorePose.getY(), Point.CARTESIAN)
                         )
                 )
-                .setLinearHeadingInterpolation(scorePose.getHeading(), scorePose.getHeading())
+                .setConstantHeadingInterpolation(Math.toRadians(0))
                 .build();
 
-        pushSamples = follower.pathBuilder()
-                .addPath(
-                        new BezierCurve(
-                                new Point(scorePose.getX(), scorePose.getY(), Point.CARTESIAN),
-                                new Point(19.788, 20.767, Point.CARTESIAN),
-                                new Point(62.302, 43.102, Point.CARTESIAN),
-                                new Point(pushSampleOnePose.getX(), pushSampleOnePose.getY(), Point.CARTESIAN)
-                        )
-                )
+        line2 = follower.pathBuilder()
+                .addPath(new BezierCurve(
+                        new Point(scorePose.getX(), scorePose.getY(), Point.CARTESIAN),
+                        new Point(19.788, 20.767, Point.CARTESIAN),
+                        new Point(62.302, 43.102, Point.CARTESIAN),
+                        new Point(pushSampleOnePose.getX(), pushSampleOnePose.getY(), Point.CARTESIAN)
+                ))
                 .setConstantHeadingInterpolation(Math.toRadians(0))
-                .addPath(
-                        new BezierLine(
-                                new Point(pushSampleOnePose.getX(), pushSampleOnePose.getY(), Point.CARTESIAN),
-                                new Point(pushSampleOneEndPose.getX(), pushSampleOneEndPose.getY(), Point.CARTESIAN)
-                        )
-                )
-                .setConstantHeadingInterpolation(Math.toRadians(0))
-                .addPath(
-                        new BezierCurve(
-                                new Point(pushSampleOneEndPose.getX(), pushSampleOneEndPose.getY(), Point.CARTESIAN),
-                                new Point(62.694, 24.294, Point.CARTESIAN),
-                                new Point(pushSampleTwoPose.getX(), pushSampleTwoPose.getY(), Point.CARTESIAN)
-                        )
-                )
-                .setConstantHeadingInterpolation(Math.toRadians(0))
-                .addPath(
-                        new BezierLine(
-                                new Point(pushSampleTwoPose.getX(), pushSampleTwoPose.getY(), Point.CARTESIAN),
-                                new Point(pushSampleTwoEndPose.getX(), pushSampleTwoEndPose.getY(), Point.CARTESIAN)
-                        )
-                )
-                .setConstantHeadingInterpolation(Math.toRadians(0))
-                .addPath(
-                        new BezierCurve(
-                                new Point(pushSampleTwoEndPose.getX(), pushSampleTwoEndPose.getY(), Point.CARTESIAN),
-                                new Point(59.951, 13.127, Point.CARTESIAN),
-                                new Point(pushSampleThreePose.getX(), pushSampleThreePose.getY(), Point.CARTESIAN)
-                        )
-                )
-                .setConstantHeadingInterpolation(Math.toRadians(0))
-                .addPath(
-                        new BezierLine(
-                                new Point(pushSampleThreePose.getX(), pushSampleThreePose.getX(), Point.CARTESIAN),
-                                new Point(pushSampleThreeEndPose.getX(), pushSampleThreeEndPose.getY(), Point.CARTESIAN)
-                        )
-                )
                 .build();
+
+        line3 = follower.pathBuilder()
+                .addPath(new BezierLine(
+                        new Point(pushSampleOnePose.getX(), pushSampleOnePose.getY(), Point.CARTESIAN),
+                        new Point(pushSampleOneEndPose.getX(), pushSampleOneEndPose.getY(), Point.CARTESIAN)
+                ))
+                .setConstantHeadingInterpolation(Math.toRadians(0))
+                .build();
+
+        line4 = follower.pathBuilder()
+                .addPath(new BezierCurve(
+                        new Point(pushSampleOneEndPose.getX(), pushSampleOneEndPose.getY(), Point.CARTESIAN),
+                        new Point(62.694, 24.294, Point.CARTESIAN),
+                        new Point(pushSampleTwoPose.getX(), pushSampleTwoPose.getY(), Point.CARTESIAN)
+                ))
+                .setConstantHeadingInterpolation(Math.toRadians(0))
+                .build();
+
+        line5 = follower.pathBuilder()
+                .addPath(new BezierLine(
+                        new Point(pushSampleTwoPose.getX(), pushSampleTwoPose.getY(), Point.CARTESIAN),
+                        new Point(pushSampleTwoEndPose.getX(), pushSampleTwoEndPose.getY(), Point.CARTESIAN)
+                ))
+                .setConstantHeadingInterpolation(Math.toRadians(0))
+                .build();
+
+        line6 = follower.pathBuilder()
+                .addPath(new BezierCurve(
+                        new Point(pushSampleTwoEndPose.getX(), pushSampleTwoEndPose.getY(), Point.CARTESIAN),
+                        new Point(59.951, 13.127, Point.CARTESIAN),
+                        new Point(pushSampleThreePose.getX(), pushSampleThreePose.getY(), Point.CARTESIAN)
+                ))
+                .setConstantHeadingInterpolation(Math.toRadians(0))
+                .build();
+
+        line7 = follower.pathBuilder()
+                .addPath(new BezierLine(
+                        new Point(pushSampleThreePose.getX(), pushSampleThreePose.getY(), Point.CARTESIAN),
+                        new Point(pushSampleThreeEndPose.getX(), pushSampleThreeEndPose.getY(), Point.CARTESIAN)
+                ))
+                .setConstantHeadingInterpolation(Math.toRadians(0))
+                .build();
+
         line8 = follower.pathBuilder()
                 .addPath(
                         new BezierCurve(
@@ -191,53 +197,82 @@ public class SpecimenNew extends OpMode {
                 break;
             case 1:
                 if (!follower.isBusy()) {
-                    follower.followPath(pushSamples, 1,true);
+                    follower.followPath(line2, 1,true);
                     setPathState(2);
                 }
                 break;
             case 2:
                 if (!follower.isBusy()) {
-                    follower.followPath(line8, 1,true);
+                    follower.followPath(line3, 1,true);
                     setPathState(3);
                 }
                 break;
             case 3:
                 if (!follower.isBusy()) {
-                    follower.followPath(line9, 1, true);
+                    follower.followPath(line4, 1,true);
                     setPathState(4);
                 }
                 break;
             case 4:
                 if (!follower.isBusy()) {
-                    follower.followPath(line10, 1,true);
+                    follower.followPath(line5, 1,true);
                     setPathState(5);
                 }
                 break;
             case 5:
                 if (!follower.isBusy()) {
-                    follower.followPath(line11, 1,true);
+                    follower.followPath(line6, 1,true);
                     setPathState(6);
                 }
                 break;
             case 6:
                 if (!follower.isBusy()) {
+                    follower.followPath(line7, 1,true);
+                    setPathState(7);
+                }
+            case 7:
+                if (!follower.isBusy()) {
+                    follower.followPath(line8, 1,true);
+                    setPathState(3);
+                }
+                break;
+            case 8:
+                if (!follower.isBusy()) {
+                    follower.followPath(line9, 1, true);
+                    setPathState(4);
+                }
+                break;
+            case 9:
+                if (!follower.isBusy()) {
+                    follower.followPath(line10, 1,true);
+                    setPathState(5);
+                }
+                break;
+            case 10:
+                if (!follower.isBusy()) {
+                    follower.followPath(line11, 1,true);
+                    setPathState(6);
+                }
+                break;
+            case 11:
+                if (!follower.isBusy()) {
                     follower.followPath(line12, 1,true);
                     setPathState(7);
                 }
                 break;
-            case 7:
+            case 12:
                 if (!follower.isBusy()) {
                     follower.followPath(line13, 1,true);
                     setPathState(8);
                 }
                 break;
-            case 8:
+            case 13:
                 if (!follower.isBusy()) {
                     follower.followPath(line14, 1,true);
                     setPathState(9);
                 }
                 break;
-            case 9:
+            case 14:
                 if (!follower.isBusy()) {
                     follower.followPath(park, 1, true);
                     setPathState(-1);
