@@ -102,6 +102,7 @@ public class SpecimenNew extends OpMode {
                                 new Point(scorePose.getX(), scorePose.getY(), Point.CARTESIAN)
                         )
                 )
+                .setConstantHeadingInterpolation(Math.toRadians(0))
                 .build();
         line9 = follower.pathBuilder()
                 .addPath(
@@ -111,6 +112,7 @@ public class SpecimenNew extends OpMode {
                                 new Point(pickupSpecimens.getX(), pickupSpecimens.getY(), Point.CARTESIAN)
                         )
                 )
+                .setConstantHeadingInterpolation(Math.toRadians(0))
                 .build();
         line10 = follower.pathBuilder()
                 .addPath(
@@ -121,6 +123,7 @@ public class SpecimenNew extends OpMode {
                                 new Point(scorePose.getX(), scorePose.getY(), Point.CARTESIAN)
                         )
                 )
+                .setConstantHeadingInterpolation(Math.toRadians(0))
                 .build();
         line11 = follower.pathBuilder()
                 .addPath(
@@ -131,6 +134,7 @@ public class SpecimenNew extends OpMode {
                                 new Point(pickupSpecimens.getX(), pickupSpecimens.getY(), Point.CARTESIAN)
                         )
                 )
+                .setConstantHeadingInterpolation(Math.toRadians(0))
                 .build();
         line12 = follower.pathBuilder()
                 .addPath(
@@ -141,6 +145,7 @@ public class SpecimenNew extends OpMode {
                                 new Point(scorePose.getX(), scorePose.getY(), Point.CARTESIAN)
                         )
                 )
+                .setConstantHeadingInterpolation(Math.toRadians(0))
                 .build();
         line13 = follower.pathBuilder()
                 .addPath(
@@ -151,6 +156,7 @@ public class SpecimenNew extends OpMode {
                                 new Point(pickupSpecimens.getX(), pickupSpecimens.getY(), Point.CARTESIAN)
                         )
                 )
+                .setConstantHeadingInterpolation(Math.toRadians(0))
                 .build();
         line14 = follower.pathBuilder()
                 .addPath(
@@ -161,6 +167,7 @@ public class SpecimenNew extends OpMode {
                                 new Point(scorePose.getX(), scorePose.getY(), Point.CARTESIAN)
                         )
                 )
+                .setConstantHeadingInterpolation(Math.toRadians(0))
                 .build();
         park = follower.pathBuilder()
                 .addPath(
@@ -171,6 +178,7 @@ public class SpecimenNew extends OpMode {
                                 new Point(parkPose.getX(), parkPose.getY(), Point.CARTESIAN)
                         )
                 )
+                .setConstantHeadingInterpolation(Math.toRadians(0))
                 .build();
 
     }
@@ -178,54 +186,54 @@ public class SpecimenNew extends OpMode {
     public void autonomousPathUpdate() {
         switch (pathState) {
             case 0:
-                follower.followPath(scorePreload, .5, true);
+                follower.followPath(scorePreload, 1, true);
                 setPathState(1);
                 break;
             case 1:
                 if (!follower.isBusy()) {
-                    follower.followPath(pushSamples, .9,true);
+                    follower.followPath(pushSamples, 1,true);
                     setPathState(2);
                 }
                 break;
             case 2:
                 if (!follower.isBusy()) {
-                    follower.followPath(line8, true);
+                    follower.followPath(line8, 1,true);
                     setPathState(3);
                 }
                 break;
             case 3:
                 if (!follower.isBusy()) {
-                    follower.followPath(line9, true);
+                    follower.followPath(line9, 1, true);
                     setPathState(4);
                 }
                 break;
             case 4:
                 if (!follower.isBusy()) {
-                    follower.followPath(line10, true);
+                    follower.followPath(line10, 1,true);
                     setPathState(5);
                 }
                 break;
             case 5:
                 if (!follower.isBusy()) {
-                    follower.followPath(line11, true);
+                    follower.followPath(line11, 1,true);
                     setPathState(6);
                 }
                 break;
             case 6:
                 if (!follower.isBusy()) {
-                    follower.followPath(line12, true);
+                    follower.followPath(line12, 1,true);
                     setPathState(7);
                 }
                 break;
             case 7:
                 if (!follower.isBusy()) {
-                    follower.followPath(line13, true);
+                    follower.followPath(line13, 1,true);
                     setPathState(8);
                 }
                 break;
             case 8:
                 if (!follower.isBusy()) {
-                    follower.followPath(line14, true);
+                    follower.followPath(line14, 1,true);
                     setPathState(9);
                 }
                 break;
